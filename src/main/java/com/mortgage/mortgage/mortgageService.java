@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class mortgageService {
@@ -18,8 +19,13 @@ public class mortgageService {
         return mortgageRepository.findAll();
     }
 
-    public void addNewMortgage(mortgage mortgage) {
+    public Optional<mortgage> findMortgageById(Long id) {
+        return mortgageRepository.findById(id);
+    }
+
+    public mortgage addNewMortgage(mortgage mortgage) {
         mortgageRepository.save(mortgage);
+        return mortgage;
     }
 
     public void deleteMortgage(Long mortgageId) {
@@ -28,5 +34,10 @@ public class mortgageService {
             throw new IllegalStateException("com.mortgage with id "+mortgageId+" does not exist");
         }
         mortgageRepository.deleteById(mortgageId);
+    }
+
+    public mortgage updateMortgage(mortgage mortgage) {
+        //TODO
+        return mortgage;
     }
 }

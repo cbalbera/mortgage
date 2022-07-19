@@ -5,5 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface mortgageRepository extends JpaRepository<mortgage,Long> {
-    // gives us ability to find by ID, etc. via interface
+    // implementing interface gives us ability to find by ID, etc.
+
+    // TODO: potentially add add'l search functionality (by loan term, interest rate, etc.)
 }
