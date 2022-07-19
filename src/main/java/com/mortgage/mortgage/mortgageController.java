@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="api/v1/com.mortgage")
+@RequestMapping(path="api/v1/mortgage")
 
 public class mortgageController {
 
@@ -48,5 +48,11 @@ public class mortgageController {
     public ResponseEntity<mortgage> updateMortgage(@RequestBody mortgage mortgage) {
         mortgage new_mtg = mortgageService.updateMortgage(mortgage);
         return new ResponseEntity<>(new_mtg,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteMortgage(@PathVariable("id") Long id) {
+        deleteMortgage(id);
+        return;
     }
 }

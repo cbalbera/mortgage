@@ -37,7 +37,7 @@ public class mortgageService {
     }
 
     public mortgage updateMortgage(mortgage mortgage) {
-        //TODO
-        return mortgage;
+        //TODO: update me to be sharper & allow updates to any data point (or combo thereof) at any time
+        return mortgageRepository.save(mortgage);
     }
 }

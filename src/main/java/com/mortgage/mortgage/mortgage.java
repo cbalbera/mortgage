@@ -27,6 +27,21 @@ public class mortgage {
     @Transient
     private double[][] amort_schedule;
 
+    @Override
+    public String toString() {
+        return "mortgage{" +
+                "id=" + id +
+                ", principal=" + principal +
+                ", down_pmt=" + down_pmt +
+                ", annual_rate=" + annual_rate +
+                ", amort_years=" + amort_years +
+                ", loan_term=" + loan_term +
+                '}';
+    }
+
+    // default constructor - used by Hibernate as per top answer in this thread: https://stackoverflow.com/questions/25452018/hibernate-annotations-no-default-constructor-for-entity?rq=1
+    public mortgage() {}
+
     public mortgage(long id, int principal, int down_pmt, double annual_rate, int amort_years, int loan_term) {
         this.id = id;
         this.principal = principal;
@@ -40,7 +55,7 @@ public class mortgage {
     }
 
     public double[][] get_amort_schedule() {
-        return monthly_amort_schedule(principal,down_pmt,annual_rate,amort_years,loan_term);
+        return monthly_amort_schedule(principal,down_pmt,annual_rate,amort_years*12,loan_term*12);
     }
 
     public double get_principal_at_date(int month) {
