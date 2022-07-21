@@ -40,6 +40,21 @@ public class mortgage_test
     }
 
     @Test
+    public void monthly_amort_schedule_test()
+    {
+        double[][] first_mortgage = mortgage.monthly_amort_schedule(600000,30000,.05,30*12,30*12);
+        assertEquals(570000,Math.round(first_mortgage[0][0]));
+        assertEquals(2375,Math.round(first_mortgage[0][1]));
+        assertEquals(685,Math.round(first_mortgage[0][2]));
+        assertEquals(569315,Math.round(first_mortgage[0][3]));
+        assertEquals(562307,Math.round(first_mortgage[11][0]));
+        assertEquals(2343,Math.round(first_mortgage[11][1]));
+        assertEquals(717,Math.round(first_mortgage[11][2]));
+        assertEquals(561590,Math.round(first_mortgage[11][3]));
+        assertEquals(0,Math.round(first_mortgage[359][3]));
+    }
+
+    @Test
     public void get_home_value_test()
     {
         double[] growth = new double[] {.04,.03,.02,.05,-.02,0};

@@ -8,13 +8,13 @@ public class mortgage {
 
     @Id
     @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
+            name = "mortgage_sequence",
+            sequenceName = "mortgage_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
+            generator = "mortgage_sequence"
     )
 
 
@@ -42,6 +42,7 @@ public class mortgage {
     // default constructor - used by Hibernate as per top answer in this thread: https://stackoverflow.com/questions/25452018/hibernate-annotations-no-default-constructor-for-entity?rq=1
     public mortgage() {}
 
+    // constructor with all values populated
     public mortgage(long id, int principal, int down_pmt, double annual_rate, int amort_years, int loan_term) {
         this.id = id;
         this.principal = principal;
@@ -50,8 +51,31 @@ public class mortgage {
         this.amort_years = amort_years;
         this.loan_term = loan_term;
     }
+
+    //TODO: create constructor with down_pmt = 0
+
     public long getID() {
         return id;
+    }
+
+    public int getPrincipal() {
+        return principal;
+    }
+
+    public int getDown_pmt() {
+        return down_pmt;
+    }
+
+    public double getAnnual_rate() {
+        return annual_rate;
+    }
+
+    public int getAmort_years() {
+        return amort_years;
+    }
+
+    public int getLoan_term() {
+        return loan_term;
     }
 
     public double[][] get_amort_schedule() {
@@ -112,8 +136,8 @@ public class mortgage {
         // form: double of length 4 (vertical) amort_months (horizontal)
         // in each amort_month, array includes: starting balance, interest, principal, ending balance
         double[][] output = new double[amort_months][4];
-        double monthly_pmt = monthly_mortgage_pmt(principal,down_pmt,annual_rate, amort_months);
-        //System.out.println("annual pmt is "+monthly_pmt*12);
+        double monthly_pmt = monthly_mortgage_pmt(principal, down_pmt ,annual_rate, amort_months / 12);
+        //System.out.println("monthly pmt is "+monthly_pmt);
         double starting_principal = principal-down_pmt;
         double monthly_interest_rate = annual_rate / 12;
         for (int i = 0; i < amort_months; i++) {
@@ -126,11 +150,14 @@ public class mortgage {
 
             // account for balloon payment, if applicable
             if (loan_term != amort_months && i == loan_term-1) {
-                amort_months += starting_principal;
+                monthly_principal += starting_principal;
                 starting_principal = 0;
             }
+            //System.out.println("monthly interest appended at "+monthly_interest);
             monthly_values[1] = monthly_interest;
+            //System.out.println("monthly principal appended at "+monthly_principal);
             monthly_values[2] = monthly_principal;
+            //System.out.println("ending principal appended at "+starting_principal);
             monthly_values[3] = starting_principal;
             output[i] = monthly_values;
         }
