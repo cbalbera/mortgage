@@ -28,7 +28,7 @@ export class amortScheduleHelper {
             //monthly_output[2] = starting_principal
             output[i] = monthly_output
         }
-        console.log(output)
+        //console.log(output)
         return output
     }
         

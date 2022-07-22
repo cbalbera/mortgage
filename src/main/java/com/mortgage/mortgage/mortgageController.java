@@ -27,11 +27,11 @@ public class mortgageController {
     }
 
     @GetMapping("/result/{id}")
-    public ResponseEntity<double[][]> getMortgageById(@PathVariable("id") Long id) {
+    public ResponseEntity<mortgage> getMortgageById(@PathVariable("id") Long id) {
         Optional<mortgage> opt_mortgage = mortgageService.findMortgageById(id);
         if (opt_mortgage.isPresent()) {
             mortgage mortgage = opt_mortgage.get();
-            return new ResponseEntity<>(mortgage.get_amort_schedule(), HttpStatus.OK);
+            return new ResponseEntity<>(mortgage, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }

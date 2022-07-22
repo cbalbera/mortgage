@@ -26,11 +26,11 @@ export class AppComponent implements OnInit {
   public getMortgages(): void {
     this.mortgageService.getMortgages().subscribe(
       (response: mortgage[]) => {
-        console.log("got mortgages");
+        //console.log("got mortgages");
         for (let i = 0; i < response.length; i++) {
           response[i].amort_schedule = amortScheduleHelper.getAmortSchedule(response[i])
         }
-        console.log(response[0].amort_schedule);
+        //console.log(response[0].amort_schedule);
         this.mortgages = response;
       },
       (error: HttpErrorResponse) => {
@@ -42,9 +42,9 @@ export class AppComponent implements OnInit {
   public getMortgage(mortgageId:number): void {
     this.mortgageService.getMortgage(mortgageId).subscribe(
       (response: mortgage) => {
-        console.log("got one mortgage");
+        //console.log("got one mortgage");
         response.amort_schedule = amortScheduleHelper.getAmortSchedule(response)
-        console.log(response.amort_schedule);
+        //console.log(response.amort_schedule);
         this.mortgage = response;
       },
       (error: HttpErrorResponse) => {
