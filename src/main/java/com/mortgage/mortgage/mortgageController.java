@@ -40,6 +40,7 @@ public class mortgageController {
 
     @PostMapping("/add")
     public ResponseEntity<mortgage> newMortgage(@RequestBody mortgage mortgage) {
+        System.out.println("put request sent - adding "+mortgage);
         mortgage new_mtg = mortgageService.addNewMortgage(mortgage);
         return new ResponseEntity<>(new_mtg,HttpStatus.CREATED);
     }

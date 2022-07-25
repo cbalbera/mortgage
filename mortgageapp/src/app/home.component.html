@@ -10,27 +10,42 @@
                             <span class="widget-caption">Mortgage Inputs</span>
                         </div>
                         <div class="widget-body">
-                            <form role="form">
+                            <form #mortgageForm="ngForm" (ngSubmit)="onSubmit(mortgageForm)" novalidate>
                                 <div class="form-group">
                                     <label for="principal">Home Value</label>
-                                    <input ngModel type="text" class="form-control" id="principal" name="principal" placeholder="$500,000">
+                                    <input 
+                                        ngModel 
+                                        required type="text" 
+                                        class="form-control" 
+                                        id="principal" 
+                                        name="principal" 
+                                        #principal="ngModel" 
+                                        placeholder="$500,000" 
+                                        pattern="\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$">
+                                        <!--(change) = "log(principal)" -->
+                                    <div class="alert alert-danger" *ngIf="principal.touched && !principal.valid">
+                                        <div *ngIf="principal.errors?.['required']">Home value is required.</div>
+                                        <div *ngIf="principal.errors?.['pattern']">Please input a valid currency value.</div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="down_pmt">Down Payment</label>
-                                    <input type="text" class="form-control" id="down_pmt" name="down_pmt" placeholder="$100,000">
+                                    <input ngModel type="text" class="form-control" id="down_pmt" name="down_pmt" placeholder="$100,000">
                                 </div>
                                 <div class="form-group">
                                     <label for="annual_rate">Annual Interest Rate</label>
-                                    <input type="text" class="form-control" id="annual_rate" name="annual_rate" placeholder="5.5%">
+                                    <input ngModel type="text" class="form-control" id="annual_rate" name="annual_rate" placeholder="5.5%">
                                 </div>
                                 <div class="form-group">
                                     <label for="amort_years">Amortization Term</label>
-                                    <input type="text" class="form-control" id="amort_years" name="amort_years" placeholder="30 years">
+                                    <input ngModel type="text" class="form-control" id="amort_years" name="amort_years" placeholder="30 years">
                                 </div>
                                 <div class="form-group">
                                     <label for="loan_term">Loan Term</label>
-                                    <input type="text" class="form-control" id="loan_term" name="loan_term" placeholder="Must be greater than or equal to amortization term">
+                                    <input ngModel type="text" class="form-control" id="loan_term" name="loan_term" placeholder="Must be greater than or equal to amortization term">
                                 </div>
+                                <input ngModel type="hidden" id="id" name="id">
+                                <button class="btn btn-block btn-default submitButton" type="submit">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -40,4 +55,5 @@
     </div>
 </div>
 
-<!--Source: https://www.bootdey.com/snippets/view/form-inputs-->
+<!--Source: https://www.bootdey.com/snippets/view/form-inputs -->
+<!--Source: https://www.bestcssbuttongenerator.com/#/7 -->

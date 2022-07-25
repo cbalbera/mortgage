@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { mortgage } from './mortgage';
 import { environment } from 'src/environments/environment';
+//import { http_putpost_mortgage } from './home.component';
 
 @Injectable({
     providedIn: 'root'
@@ -24,13 +25,15 @@ export class mortgageService {
     }
 
     // POST request
-    public addMortgage(mortgage: mortgage): Observable<mortgage> {
-        return this.http.post<mortgage>(`${this.apiServerURL}/add`, mortgage)
+    public addMortgage(mortgage: string): Observable<JSON> {
+        console.log(mortgage);
+        console.log(`${this.apiServerURL}/add`);
+        return this.http.post<JSON>(`${this.apiServerURL}/add`, JSON.stringify(mortgage))
     }
 
     // PUT request
-    public updateMortgage(mortgage: mortgage): Observable<mortgage> {
-        return this.http.put<mortgage>(`${this.apiServerURL}/update`, mortgage)
+    public updateMortgage(mortgage: JSON): Observable<JSON> {
+        return this.http.put<JSON>(`${this.apiServerURL}/update`, mortgage)
     }
 
     // DELETE request

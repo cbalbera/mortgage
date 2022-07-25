@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { mortgageService } from './mortgage.service';
+import { NgForm } from '@angular/forms';
 
 @Component({ 
     selector: 'home',
@@ -7,22 +9,33 @@ import { Component, OnInit } from '@angular/core';
     //template: ` <button type="button" (click)="submitData()">Click me!</button> {{clickMessage}}`
 })
 export class HomeComponent implements OnInit {
-    public id!: number;
-    public principal!: number;
-    public down_pmt!: number;
-    public annual_rate!: number;
-    public amort_years!: number;
-    public loan_term!: number;
 
-    constructor() {}
+    constructor(private mortgageService: mortgageService) {}
 
     ngOnInit() {
-        //this.getMortgages();
-      }
-
-    /*
-    public submitData(event: click): void {
-
+        
     }
-    */
+
+    onSubmit(form: NgForm) {
+        //console.log(form.value);
+        var id_value = Math.floor(Math.random() * Date.now())
+        form.controls['id'].setValue(id_value);
+        this.mortgageService.addMortgage(form.value);
+    }
+    
+    //log(item: any) {console.log(item); } // for viewing ngModel class data in browser console
+
 }
+
+/*
+export interface http_putpost_mortgage{
+
+    id: number;
+    principal: number;
+    down_pmt: number;
+    annual_rate: number;
+    amort_years: number;
+    loan_term: number;    
+
+}
+*/
