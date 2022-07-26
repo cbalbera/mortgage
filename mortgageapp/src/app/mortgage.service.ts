@@ -25,10 +25,16 @@ export class mortgageService {
     }
 
     // POST request
-    public addMortgage(mortgage: string): Observable<JSON> {
+    public addMortgage(mortgage: string): void {
         console.log(mortgage);
         console.log(`${this.apiServerURL}/add`);
-        return this.http.post<JSON>(`${this.apiServerURL}/add`, JSON.stringify(mortgage))
+        this.http.post<JSON>(`${this.apiServerURL}/add`, mortgage).subscribe()
+        // to have this return an Observable<JSON> return the below line, up to (not including) .toPromise()
+        /*
+        this.http.post<JSON>(`${this.apiServerURL}/add`, mortgage).toPromise().then(mortgage => {
+            console.log(mortgage);
+        })
+        */
     }
 
     // PUT request

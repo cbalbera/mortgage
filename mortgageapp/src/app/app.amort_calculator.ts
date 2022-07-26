@@ -2,7 +2,7 @@ import { mortgage } from "./mortgage"
 
 export class amortScheduleHelper {
     static getAmortSchedule(mortgage: mortgage): string[][] {
-        console.log(mortgage)
+        //console.log(mortgage)
         var output = []
         var amort_months = mortgage.amort_years * 12
         var starting_principal = mortgage.principal - mortgage.down_pmt

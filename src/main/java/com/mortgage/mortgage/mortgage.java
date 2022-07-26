@@ -6,6 +6,8 @@ import javax.persistence.*;
 @Table
 public class mortgage {
 
+    // disabling backend ID generation as frontend handles creation of unique ID
+    /*
     @Id
     @SequenceGenerator(
             name = "mortgage_sequence",
@@ -16,8 +18,9 @@ public class mortgage {
             strategy = GenerationType.SEQUENCE,
             generator = "mortgage_sequence"
     )
+    */
 
-
+    @Id
     private long id;
     private int principal;
     private int down_pmt;

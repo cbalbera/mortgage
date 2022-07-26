@@ -3,10 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { AppComponent } from './app.component';
+import { MortgageComponent } from './mortgage-display.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'app', component: AppComponent },
+  { path: 'show', component: MortgageComponent },
 
   // otherwise redirect to home
   //{ path: '**', redirectTo: '' }
@@ -18,4 +19,4 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule { };
-export const routingComponents = [HomeComponent, AppComponent]
+export const routingComponents = [HomeComponent, AppComponent, MortgageComponent]
